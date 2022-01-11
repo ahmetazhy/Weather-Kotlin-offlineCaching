@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/nav_graph"
+    app:startDestination="@id/start_fragment">
+
+    <fragment
+        android:id="@+id/start_fragment"
+        android:name="com.example.weather_test.startapp.StartFragment"
+        android:label="StartFragment" >
+        <action
+            android:id="@+id/action_startFragment_to_detail_fragment"
+            app:destination="@id/detail_fragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@android:anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/detail_fragment"
+        android:name="com.example.weather_test.detail.Detailfragment"
+        android:label="Detail_fragment" >
+        <argument
+            android:name="selectedProperty"
+            app:argType="com.example.weather_test.network.Forecast"/>
+    </fragment>
+
+</navigation>
