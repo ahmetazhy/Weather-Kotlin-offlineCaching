@@ -7,6 +7,9 @@
         <variable
             name="datetoday"
             type="String" />
+        <variable
+            name="icontoday"
+            type="String" />
 
         <variable
             name="ViewModel"
@@ -43,7 +46,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.0"
-                tools:srcCompat="@drawable/ic_launcher_foreground"
+                tools:srcCompat="@drawable/art_clear"
                 tools:ignore="VectorDrawableCompat" />
 
             <TextView
@@ -52,9 +55,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="120dp"
                 android:gravity="center"
+                android:text="@{datetoday}"
+                style="@style/TextAppearance.Date"
                 android:paddingStart="10dp"
-                android:textColor="@color/white"
-                android:textSize="25sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/DayType"
                 tools:text="Today, Julay, 1" />
@@ -64,10 +67,10 @@
                 android:layout_width="46dp"
                 android:layout_height="26dp"
                 android:layout_marginTop="16dp"
-                android:fontFamily="@font/romanesco"
                 android:text="Sunday"
-                android:textColor="@color/white"
                 android:textSize="25sp"
+                style="@style/TextAppearance.Title"
+                android:fontFamily="@font/romanesco"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.068"
                 app:layout_constraintStart_toStartOf="parent"
@@ -80,8 +83,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="68dp"
                 android:gravity="center"
-                android:textColor="@color/white"
-                android:textSize="60sp"
+                style="@style/TextAppearance.Maxtemp"
                 app:layout_constraintBottom_toTopOf="@+id/main_temp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/date"
@@ -96,8 +98,7 @@
                 android:layout_marginEnd="72dp"
                 android:layout_marginBottom="16dp"
                 android:text="@{ViewModel.properties[0].Weather[0].description}"
-                android:textColor="@color/white"
-                android:textSize="20sp"
+              style="@style/TextAppearance.Description"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/main_temp"
                 app:layout_constraintHorizontal_bias="0.7"
@@ -111,8 +112,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="80dp"
                 android:gravity="center"
-                android:textColor="@color/white"
-                android:textSize="35sp"
+                style="@style/TextAppearance.Maintemp"
                 app:layout_constraintBaseline_toBaselineOf="@+id/description"
                 app:layout_constraintEnd_toEndOf="parent"
                 tools:text="10" />
@@ -158,7 +158,6 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:WeatherApiStatus="@{ViewModel.status}" />
-
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

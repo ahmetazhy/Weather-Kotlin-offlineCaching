@@ -5,15 +5,27 @@
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-
-    </style>
-
-    <style name="descriptioncolor" parent="AppTheme">
-        <!-- Customize your theme here. -->
-        <item name="color">@color/gray</item>
     </style>
 
 
+    <style name="TextAppearance.Title" parent="TextAppearance.MaterialComponents.Headline6">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
 
+    <style name="TextAppearance.Date" parent="TextAppearance.Title">
+        <item name="android:textSize">25sp</item>
+    </style>
 
+    <style name="TextAppearance.Maxtemp" parent="TextAppearance.Title">
+        <item name="android:textSize">60sp</item>
+    </style>
+
+    <style name="TextAppearance.Maintemp" parent="TextAppearance.Title">
+        <item name="android:textSize">35sp</item>
+    </style>
+
+    <style name="TextAppearance.Description" parent="TextAppearance.Title">
+        <item name="android:textSize">20sp</item>
+    </style>
 </resources>

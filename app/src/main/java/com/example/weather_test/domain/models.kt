@@ -24,10 +24,10 @@ import com.example.weather_test.network.Wind
 //    val pressure: Double,
 //    val humidity: Int,
 //    val temp_kf: Double
-//
+
 //)
 
-//
+
 //data class WeatherPropertyData(
 //    val main: Main,
 //    val weather: List<Weather>,

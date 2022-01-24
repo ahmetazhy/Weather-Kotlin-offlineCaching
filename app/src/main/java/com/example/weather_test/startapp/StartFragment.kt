@@ -12,8 +12,11 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.example.weather_test.R
 import com.example.weather_test.databinding.StartFragmentBinding
+import java.text.ParseException
+import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
+import java.util.*
 
 
 class StartFragment : Fragment() {
@@ -43,9 +46,40 @@ class StartFragment : Fragment() {
         binding.viewModel = viewModel
         viewModel.properties.observe(viewLifecycleOwner, Observer {
             var dateday=it[0].dt_txt
-            val firstApiFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
-            val datetoday = LocalDate.parse(dateday , firstApiFormat)
-            binding.setDatetoday(datetoday.toString())
+
+
+            fun getAbbreviatedFromDateTime(dateTime: String, dateFormat: String, field: String): String? {
+                val input = SimpleDateFormat(dateFormat)
+                val output = SimpleDateFormat(field)
+                try {
+                    val getAbbreviate = input.parse(dateTime)    // parse input
+                    return output.format(getAbbreviate)    // format output
+                } catch (e: ParseException) {
+                    e.printStackTrace()
+                }
+
+                return null
+            }
+
+            val dayOfWeek=getAbbreviatedFromDateTime(dateday,"yyyy-MM-dd HH:mm:ss","EEEE,"+" MMMM"+" d")
+
+            binding.setDatetoday(dayOfWeek.toString())
+
+        })
+
+
+
+
+
+        binding.weekList.adapter = WeatherAdapter(WeatherAdapter.OnClickListener {
+            viewModel.displayPropertyDetails(it)
+        })
+
+
+
+        viewModel.properties.observe(viewLifecycleOwner, Observer {
+            var iconday=it[0].weather[0].description
+            binding.setIcontoday(iconday)
         })
 
         binding.weekList.adapter = WeatherAdapter(WeatherAdapter.OnClickListener {

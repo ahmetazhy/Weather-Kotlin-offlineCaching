@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.weather_test.databinding.ViewItemBinding
 import com.example.weather_test.network.Forecast
+import java.text.ParseException
+import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
@@ -26,10 +28,24 @@ class WeatherAdapter(val onClickListener: OnClickListener) :
 
 
             val gettoformat = forecast.dt_txt
-            val firstApiFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
-            val date = LocalDate.parse(gettoformat, firstApiFormat)
+            fun getAbbreviatedFromDateTime(dateTime: String, dateFormat: String, field: String): String? {
+                val input = SimpleDateFormat(dateFormat)
+                val output = SimpleDateFormat(field)
+                try {
+                    val getAbbreviate = input.parse(dateTime)    // parse input
+                    return output.format(getAbbreviate)    // format output
+                } catch (e: ParseException) {
+                    e.printStackTrace()
+                }
 
-            binding.wDayType.text = date.dayOfWeek.toString()
+                return null
+            }
+
+            val dayOfWeek=getAbbreviatedFromDateTime(gettoformat,"yyyy-MM-dd HH:mm:ss","EEEE,"+" MMMM"+" d")
+            val onedayOfWeek=getAbbreviatedFromDateTime(gettoformat,"yyyy-MM-dd HH:mm:ss","EEEE")
+
+
+            binding.wDayType.text = onedayOfWeek.toString()
             binding.executePendingBindings()
         }
     }
