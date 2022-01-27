@@ -4,9 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
-            name="datetoday"
+            name="tempmax"
             type="String" />
+
+        <variable
+            name="tempmin"
+            type="String" />
+
         <variable
             name="icontoday"
             type="String" />
@@ -14,6 +20,8 @@
         <variable
             name="ViewModel"
             type="com.example.weather_test.startapp.StartViewModel" />
+
+
     </data>
 
     <LinearLayout
@@ -31,7 +39,7 @@
             android:layout_height="wrap_content">
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/imageViewtoday"
                 android:layout_width="76dp"
                 android:layout_height="84dp"
                 android:layout_marginStart="119dp"
@@ -39,6 +47,7 @@
                 android:layout_marginEnd="216dp"
                 android:layout_marginBottom="16dp"
                 android:contentDescription="TODO"
+                tools:src="@drawable/art_clouds"
                 app:layout_constraintBottom_toTopOf="@+id/description"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/maxtemp"
@@ -46,7 +55,8 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.0"
-                tools:srcCompat="@drawable/art_clear"
+
+
                 tools:ignore="VectorDrawableCompat" />
 
             <TextView
@@ -55,7 +65,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="120dp"
                 android:gravity="center"
-                android:text="@{datetoday}"
+                android:text="ss"
                 style="@style/TextAppearance.Date"
                 android:paddingStart="10dp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -67,9 +77,9 @@
                 android:layout_width="46dp"
                 android:layout_height="26dp"
                 android:layout_marginTop="16dp"
-                android:text="Sunday"
+                android:text="Erbil"
                 android:textSize="25sp"
-                style="@style/TextAppearance.Title"
+                android:textColor="@color/white"
                 android:fontFamily="@font/romanesco"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.068"
@@ -83,6 +93,8 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="68dp"
                 android:gravity="center"
+                android:text="@{tempmax}"
+
                 style="@style/TextAppearance.Maxtemp"
                 app:layout_constraintBottom_toTopOf="@+id/main_temp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -92,18 +104,18 @@
 
             <TextView
                 android:id="@+id/description"
+                style="@style/TextAppearance.Description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="72dp"
                 android:layout_marginBottom="16dp"
-                android:text="@{ViewModel.properties[0].Weather[0].description}"
-              style="@style/TextAppearance.Description"
+                android:text="@{ViewModel.properties[0].weather[0].description}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/main_temp"
-                app:layout_constraintHorizontal_bias="0.7"
+                app:layout_constraintHorizontal_bias="0.563"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView"
+                app:layout_constraintTop_toBottomOf="@+id/imageViewtoday"
                 tools:text="Ligh Rain" />
 
             <TextView
@@ -112,10 +124,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="80dp"
                 android:gravity="center"
+                android:text="@{tempmin}"
                 style="@style/TextAppearance.Maintemp"
                 app:layout_constraintBaseline_toBaselineOf="@+id/description"
-                app:layout_constraintEnd_toEndOf="parent"
-                tools:text="10" />
+                app:layout_constraintEnd_toEndOf="parent" />
 
             <ImageView
                 android:id="@+id/first_status_image"

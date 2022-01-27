@@ -31,6 +31,7 @@ class DetailViewModel(forecast: Forecast, app: Application) : AndroidViewModel(a
     val selectedProperty: LiveData<Forecast>
         get() = _selectedProperty
 
+
     init {
         _selectedProperty.value = forecast
     }

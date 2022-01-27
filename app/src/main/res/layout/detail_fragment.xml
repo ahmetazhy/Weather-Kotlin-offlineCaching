@@ -6,6 +6,9 @@
 
     <data>
         <variable
+            name="detailicon"
+            type="String" />
+        <variable
             name="viewModell"
             type="com.example.weather_test.detail.DetailViewModel" />
     </data>
@@ -32,7 +35,7 @@ android:orientation="vertical">
             android:layout_marginEnd="151dp"
             android:textColor="@color/gray"
             android:textSize="20sp"
-            android:text="@{viewModell.selectedProperty.dt_txt}"
+
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.677"
             app:layout_constraintStart_toStartOf="parent"
@@ -47,12 +50,12 @@ android:orientation="vertical">
             android:layout_marginStart="44dp"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="28dp"
-            android:text="@{String.valueOf(viewModell.selectedProperty.main.temp_max)}"
+            android:text="@{String.valueOf(viewModell.selectedProperty.temp.max)}"
             android:textColor="@color/black"
             app:layout_constraintBottom_toTopOf="@+id/detail_one_maintemp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.512"
-            app:layout_constraintStart_toEndOf="@+id/imageView2"
+            app:layout_constraintStart_toEndOf="@+id/imageViewdetail"
             app:layout_constraintTop_toBottomOf="@+id/detail_one_date"
             app:layout_constraintVertical_bias="1.0"
             tools:text="16" />
@@ -76,14 +79,14 @@ android:orientation="vertical">
             android:layout_height="wrap_content"
             android:layout_marginEnd="72dp"
             android:textColor="@color/gray"
-            android:text="@{String.valueOf(viewModell.selectedProperty.main.temp_min)}"
+            android:text="@{String.valueOf(viewModell.selectedProperty.temp.min)}"
             style="@style/TextAppearance.Maintemp"
             app:layout_constraintBaseline_toBaselineOf="@+id/detail_one_description"
             app:layout_constraintEnd_toEndOf="parent"
             tools:text="12" />
 
         <ImageView
-            android:id="@+id/imageView2"
+            android:id="@+id/imageViewdetail"
             android:layout_width="78dp"
             android:layout_height="69dp"
             android:layout_marginStart="104dp"
@@ -94,7 +97,8 @@ android:orientation="vertical">
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/detail_one_date"
             app:layout_constraintVertical_bias="1.0"
-            app:srcCompat="@drawable/art_rain" />
+            app:srcCompat="@drawable/art_rain"
+            android:contentDescription="TODO" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline"
@@ -121,9 +125,9 @@ android:orientation="vertical">
             android:id="@+id/textView18"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="30sp"
-            android:textColor="@color/gray"
-            android:text="Humidity" />
+            android:text="Humidity"
+            android:textColor="#9E9E9E"
+            android:textSize="30sp" />
 
         <TextView
             android:id="@+id/humidity"
@@ -131,7 +135,7 @@ android:orientation="vertical">
             android:layout_height="wrap_content"
             android:layout_marginStart="60dp"
             android:textSize="35sp"
-            android:text="@{String.valueOf(viewModell.selectedProperty.main.humidity)}"
+            android:text="@{String.valueOf(viewModell.selectedProperty.humidity)}"
             android:textColor="@color/white"
             tools:text="90 %" />
     </TableRow>
@@ -146,9 +150,9 @@ android:orientation="vertical">
             android:id="@+id/textView20"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="30sp"
-            android:textColor="@color/gray"
-            android:text="Pressure" />
+            android:text="Pressure"
+            android:textColor="#9E9E9E"
+            android:textSize="30sp" />
 
         <TextView
             android:id="@+id/pressure"
@@ -156,7 +160,7 @@ android:orientation="vertical">
             android:layout_height="wrap_content"
             android:layout_marginStart="60dp"
             android:textSize="35sp"
-            android:text="@{String.valueOf(viewModell.selectedProperty.main.pressure)}"
+            android:text="@{String.valueOf(viewModell.selectedProperty.pressure)}"
             android:textColor="@color/white"
             tools:text="996phPa" />
     </TableRow>
@@ -171,16 +175,16 @@ android:orientation="vertical">
             android:id="@+id/textView22"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="30sp"
-            android:textColor="@color/gray"
-            android:text="wind" />
+            android:text="wind"
+            android:textColor="#9E9E9E"
+            android:textSize="30sp" />
 
         <TextView
             android:id="@+id/wind"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="60dp"
-            android:text="@{String.valueOf(viewModell.selectedProperty.wind.speed)}"
+            android:text="@{String.valueOf(viewModell.selectedProperty.wind_deg)}"
             android:textSize="35sp"
             android:textColor="@color/white"
             tools:text="8 Km/hE" />

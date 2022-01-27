@@ -31,3 +31,4 @@ fun bindStatus(statusImageView: ImageView, status: WeatherApiStatus?) {
         }
     }
 }
+

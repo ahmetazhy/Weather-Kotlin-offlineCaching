@@ -2,39 +2,33 @@ package com.example.weather_test.network
 
 import android.os.Parcelable
 import com.example.weather_test.database.DatabaseForecast
-import com.example.weather_test.database.DatabaseMain
+import com.example.weather_test.database.DatabaseTemp
 import com.example.weather_test.database.DatabaseWeather
-import com.example.weather_test.database.DatabaseWind
-
 import com.squareup.moshi.JsonClass
+
+
 import kotlinx.android.parcel.Parcelize
 
+@JsonClass(generateAdapter = true)
 @Parcelize
 data class WeatherProperty(
-    val cod: String,
-    val list: List<Forecast>
+    val daily: List<Forecast>
 ):  Parcelable
 
 @JsonClass(generateAdapter = true)
 @Parcelize
 data class Forecast(
-    val main: Main,
     val weather: List<Weather>,
-    var dt_txt: String,
-    val wind: Wind,
-    val dt:Int
-) :  Parcelable
-
-@JsonClass(generateAdapter = true)
-@Parcelize
-data class Main(
-    val temp: Double,
-    val temp_min: Double,
-    val temp_max: Double,
+    val dt:Int,
+    val temp:Temp,
     val pressure: Double,
     val humidity: Int,
-    val temp_kf: Double
-):  Parcelable
+    val wind_speed: Double,
+    val wind_deg: Double,
+   val dew_point: Double,
+val wind_gust: Double
+
+    ) :  Parcelable
 
 @JsonClass(generateAdapter = true)
 @Parcelize
@@ -42,29 +36,35 @@ data class Weather(
     val id: Int,
     val main: String,
     val description: String,
-    val icon: String
+    val icon:String
 ):  Parcelable
 
+@JsonClass(generateAdapter = true)
 @Parcelize
-data class Wind(
-    val speed: Double,
-    val deg: Double
+data class Temp(
+    val day: Double,
+    val min: Double,
+    val max: Double
 ):  Parcelable
+
 
 
 
 fun WeatherProperty.asDatabaseModel(): Array<DatabaseForecast> {
-    return list.map {
-        val newMain = DatabaseMain(it.main.temp, it.main.temp_min,it.main.temp_max,it.main.temp_kf,it.main.humidity,it.main.pressure )
-        val newWind= DatabaseWind(it.wind.speed,it.wind.deg)
+    return daily.map {
+        val newTemp = DatabaseTemp(it.temp.day,it.temp.min,it.temp.max)
         val newWeather=
             DatabaseWeather(it.weather[0].id,it.weather[0].main,it.weather[0].description,it.weather[0].icon)
         DatabaseForecast(
-            main = newMain,
             weather = newWeather,
-            dt_txt = it.dt_txt,
             dt =it.dt,
-            wind = newWind
+            temp=newTemp,
+            dew_point = it.dew_point,
+            humidity = it.humidity,
+            pressure = it.pressure,
+            wind_deg = it.wind_deg,
+            wind_gust = it.wind_gust,
+            wind_speed = it.wind_speed
         )
     }.toTypedArray()
 }

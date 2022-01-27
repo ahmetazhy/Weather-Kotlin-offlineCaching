@@ -1,8 +1,10 @@
 package com.example.weather_test.startapp
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.*
 import com.example.weather_test.database.getDatabase
+
 
 import com.example.weather_test.network.Forecast
 import com.example.weather_test.network.WeatherApi
@@ -13,6 +15,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+
 
 enum class WeatherApiStatus { LOADING, ERROR, DONE }
 
@@ -26,12 +29,14 @@ class StartViewModel(application: Application) : AndroidViewModel(application) {
 
     private val databaseWork = getDatabase(application)
     private val weatherPropertyRepository = WeatherPropertyRepository(databaseWork)
-
+//
     private val _navigateToSelectedWeatherProperty= MutableLiveData<Forecast>()
-
-    // The external immutable LiveData for the navigation property
+////
+////    // The external immutable LiveData for the navigation property
     val navigateToSelectedProperty: MutableLiveData<Forecast>
         get() = _navigateToSelectedWeatherProperty
+//
+
     private val database = getDatabase(application)
     private val weatherRepository = WeatherPropertyRepository(database)
 
@@ -51,26 +56,15 @@ class StartViewModel(application: Application) : AndroidViewModel(application) {
 //        get() = _properties
 //
 //
-//    private val _navigateToSelectedWeatherProperty= MutableLiveData<Forecast>()
-//
-//    // The external immutable LiveData for the navigation property
-//    val navigateToSelectedProperty: MutableLiveData<Forecast>
-//        get() = _navigateToSelectedWeatherProperty
 //
 //
 //    private var viewModelJob = Job()
 //    private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 //
 //
-//    private val database = getDatabase(application)
-//    private val weatherRepository = WeatherPropertyRepository(database)
 //
 //    init {
 //        getTodayIsForcast()
-//        viewModelScope.launch {
-//            weatherRepository.refreshWeatherProperty()
-//       }
-//
 //    }
 //
 //    private fun getTodayIsForcast() {
@@ -79,10 +73,14 @@ class StartViewModel(application: Application) : AndroidViewModel(application) {
 //            _status.value = WeatherApiStatus.LOADING
 //            try {
 //                var resultapi = getPropertiesDeferred.await()
+//
 //                _status.value = WeatherApiStatus.DONE
-//                _properties.value = resultapi.list
+//                _properties.value = resultapi.daily
+//
+//
 //
 //            } catch (e: Exception) {
+//                Log.e("API Error:", e.localizedMessage)
 //                _status.value = WeatherApiStatus.ERROR
 //            }
 //        }

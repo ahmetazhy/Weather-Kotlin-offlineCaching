@@ -5,10 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.example.weather_test.R
 import com.example.weather_test.databinding.DetailFragmentBinding
+import com.example.weather_test.startapp.StartViewModel
 
 class Detailfragment : Fragment() {
+    private lateinit var viewModell: DetailViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -24,6 +28,21 @@ class Detailfragment : Fragment() {
 
         binding.viewModell = ViewModelProvider(
             this, viewModelFactory).get(DetailViewModel::class.java)
+
+
+//        viewModell.selectedProperty.observe(viewLifecycleOwner, Observer {
+//            var dateday = it.weather[0].description
+//            val lightrain = "light rain"
+//            if (lightrain == dateday) {
+//                binding.imageViewdetail.setImageResource(R.drawable.art_light_rain)
+//            }
+//
+//
+//        })
+
+
+
+
 
         return binding.root
     }

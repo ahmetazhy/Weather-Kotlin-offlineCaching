@@ -8,9 +8,9 @@ import kotlinx.coroutines.Deferred
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
+//https://samples.openweathermap.org/data/2.5/
 
-
-private const val BASE_URL = "https://samples.openweathermap.org/data/2.5/"
+private const val BASE_URL = "https://api.openweathermap.org/data/2.5/"
 
 /**
  * Build the Moshi object that Retrofit will be using, making sure to add the Kotlin adapter for
@@ -30,8 +30,8 @@ private val moshi = Moshi.Builder()
  * A public interface that exposes the [getProperties] method
  */
 interface WeatherApiService {
-
-    @GET("forecast?id=524901&appid=b1b15e88fa797225412429c1c50c122a1")
+//              forecast?id=524901&appid=b1b15e88fa797225412429c1c50c122a1
+    @GET("onecall?lat=36&lon=43.9&exclude=minutely,hourly&units=metric&appid=8a5fcd3afb779f8f3e06507be8f26388")
     fun getProperties(): Deferred<WeatherProperty>
 }
 
