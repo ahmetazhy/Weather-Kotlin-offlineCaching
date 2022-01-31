@@ -22,11 +22,11 @@ class WeatherAdapter(private val onClickListener: OnClickListener) :
     class WeatherPropertyViewHolder(private var binding: ViewItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        @SuppressLint("SimpleDateFormat")
+        @SuppressLint("SimpleDateFormat", "SetTextI18n")
         @RequiresApi(Build.VERSION_CODES.O)
         fun bind(forecast: Forecast) {
-            binding.wTempMax.text = ((forecast.temp.max.toInt().toString())+ " \u00B0")
-            binding.wTempMain.text = ((forecast.temp.min.toInt().toString())+ " \u00B0")
+            binding.wTempMax.text = ((forecast.temp.max.toInt().toString())+ "\u00B0")
+            binding.wTempMain.text = ((forecast.temp.min.toInt().toString())+ "\u00B0")
             binding.wDescription.text = forecast.weather[0].description
 
             val dtdate: Long = forecast.dt.toLong()

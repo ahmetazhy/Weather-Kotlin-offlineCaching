@@ -42,12 +42,12 @@ data class DatabaseWeather(
 
 fun List<DatabaseForecast>.asDomainModel(): List<Forecast> {
     return map {
-            val NewMTemp = Temp(it.temp!!.day,it.temp.min,it.temp.max)
-        val NewWeather= Weather(it.weather!!.id,it.weather.main,it.weather.description,it.weather.icon)
+            val newMTemp = Temp(it.temp!!.day,it.temp.min,it.temp.max)
+        val newWeather= Weather(it.weather!!.id,it.weather.main,it.weather.description,it.weather.icon)
 
         Forecast(
-            temp = NewMTemp,
-            weather = listOf(NewWeather),
+            temp = newMTemp,
+            weather = listOf(newWeather),
             dt = it.dt,
             wind_speed = it.wind_speed,
             wind_gust = it.wind_gust,
