@@ -21,7 +21,6 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.weather_test.network.Forecast
-import com.example.weather_test.network.WeatherProperty
 
 
 class DetailViewModel(forecast: Forecast, app: Application) : AndroidViewModel(app) {
@@ -33,7 +32,7 @@ class DetailViewModel(forecast: Forecast, app: Application) : AndroidViewModel(a
 
 
     init {
-        _selectedProperty.value = forecast
+        _selectedProperty.postValue(forecast)
     }
 
 }

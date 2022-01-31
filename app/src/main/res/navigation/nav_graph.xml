@@ -10,15 +10,13 @@
         <action
             android:id="@+id/action_startFragment_to_detail_fragment"
             app:destination="@id/detail_fragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@anim/slide_in_right"
-            app:popExitAnim="@android:anim/slide_out_right" />
+
+         />
     </fragment>
     <fragment
         android:id="@+id/detail_fragment"
         android:name="com.example.weather_test.detail.Detailfragment"
-        android:label="Detail_fragment" >
+        android:label="Detail" >
         <argument
             android:name="selectedProperty"
             app:argType="com.example.weather_test.network.Forecast"/>

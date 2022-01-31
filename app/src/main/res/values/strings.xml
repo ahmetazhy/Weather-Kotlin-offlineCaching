@@ -2,4 +2,15 @@
     <string name="app_name">weather</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="humidity">Humidity</string>
+    <string name="pressure">Pressure</string>
+    <string name="detail_icon">detail_icon</string>
+    <string name="wind">wind</string>
+    <string name="weather_icon">weather Icon</string>
+    <string name="erbil">Erbil</string>
+    <string name="today_section">Today Section</string>
+    <string name="week_description">Week Description</string>
+    <string name="week_icon">Week Icon</string>
+    <string name="more">More</string>
+    <string name="share">share</string>
 </resources>

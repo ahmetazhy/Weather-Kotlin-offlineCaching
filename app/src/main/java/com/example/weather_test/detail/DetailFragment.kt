@@ -1,50 +1,135 @@
 package com.example.weather_test.detail
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
+import androidx.navigation.ui.NavigationUI
 import com.example.weather_test.R
 import com.example.weather_test.databinding.DetailFragmentBinding
-import com.example.weather_test.startapp.StartViewModel
+import java.text.SimpleDateFormat
+
+import java.util.*
 
 class Detailfragment : Fragment() {
     private lateinit var viewModell: DetailViewModel
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         val application = requireNotNull(activity).application
         val binding = DetailFragmentBinding.inflate(inflater)
-        binding.lifecycleOwner=this
+        binding.lifecycleOwner = this
 
         val forecast = DetailfragmentArgs.fromBundle(arguments!!).selectedProperty
 
         val viewModelFactory = DetailViewModelFactory(forecast, application)
 
-        binding.viewModell = ViewModelProvider(
-            this, viewModelFactory).get(DetailViewModel::class.java)
+        viewModell = ViewModelProvider(
+            this, viewModelFactory
+        ).get(DetailViewModel::class.java)
 
-
-//        viewModell.selectedProperty.observe(viewLifecycleOwner, Observer {
-//            var dateday = it.weather[0].description
-//            val lightrain = "light rain"
-//            if (lightrain == dateday) {
-//                binding.imageViewdetail.setImageResource(R.drawable.art_light_rain)
-//            }
-//
-//
-//        })
+        binding.viewModell = this.viewModell
 
 
 
+        viewModell.selectedProperty.observe(viewLifecycleOwner) {
+            val newTempmax = it.temp.max
+
+            binding.tempmax = ((newTempmax.toInt().toString()) + "\u00B0")
+
+        }
+
+        viewModell.selectedProperty.observe(viewLifecycleOwner) {
+            val newTempmin = it.temp.min
+
+            binding.tempmin = ((newTempmin.toInt().toString()) + "\u00B0")
+
+        }
 
 
+        viewModell.selectedProperty.observe(viewLifecycleOwner) {
+            val newHumidity = it.humidity
+            binding.setHumidity(("$newHumidity %"))
+        }
+        viewModell.selectedProperty.observe(viewLifecycleOwner) {
+            val newPressure = it.pressure
+            binding.setPressure(((newPressure.toInt().toString()) + " hPa"))
+        }
+        viewModell.selectedProperty.observe(viewLifecycleOwner) {
+            val newWind = it.wind_speed
+            binding.setWind(((newWind.toInt().toString()) + " km/h E"))
+        }
+
+
+        viewModell.selectedProperty.observe(viewLifecycleOwner) {
+            val dtdatetype: Long = it.dt.toLong()
+            val date = Date(dtdatetype * 1000L)
+            val jdf = SimpleDateFormat("EEEE," + " MMMM" + " d")
+            jdf.timeZone = TimeZone.getTimeZone("GMT-4")
+            val detaildatedate = jdf.format(date)
+            binding.detaildate = detaildatedate.toString()
+        }
+
+
+
+        viewModell.selectedProperty.observe(viewLifecycleOwner) {
+            val dateday = it.weather[0].description
+            val lightrain = "light rain"
+            val overcastclouds = "overcast clouds"
+            val brokencloud = "broken clouds"
+            val clearsky = "clear sky"
+            val scatteredclouds = "scattered clouds"
+            val rain = "rain"
+            val fewclouds = "few clouds"
+
+            when {
+                lightrain == dateday -> {
+                    binding.imageViewdetail.setImageResource(R.drawable.art_light_rain)
+                }
+                overcastclouds == dateday -> {
+                    binding.imageViewdetail.setImageResource(R.drawable.art_light_clouds)
+                }
+                brokencloud == dateday -> {
+                    binding.imageViewdetail.setImageResource(R.drawable.art_clouds)
+                }
+                clearsky == dateday -> {
+                    binding.imageViewdetail.setImageResource(R.drawable.art_clear)
+                }
+                scatteredclouds == dateday -> {
+                    binding.imageViewdetail.setImageResource(R.drawable.art_clouds)
+                }
+                rain == dateday -> {
+                    binding.imageViewdetail.setImageResource(R.drawable.art_rain)
+                }
+                fewclouds == dateday -> {
+                    binding.imageViewdetail.setImageResource(R.drawable.art_light_clouds)
+                }
+            }
+        }
+
+
+        (activity as AppCompatActivity?)!!.supportActionBar!!.show()
+
+        setHasOptionsMenu(true)
         return binding.root
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu, menu)
+        inflater.inflate(R.menu.share, menu)
+    }
+
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return NavigationUI.onNavDestinationSelected(item,
+            view!!.findNavController())
+                || super.onOptionsItemSelected(item)
     }
 }
 

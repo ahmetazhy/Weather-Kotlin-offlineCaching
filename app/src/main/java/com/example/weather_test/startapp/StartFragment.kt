@@ -2,24 +2,17 @@ package com.example.weather_test.startapp
 
 import android.os.Build
 import android.os.Bundle
-import android.view.*
-import android.widget.TextView
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.NavigationUI
 import com.example.weather_test.R
 import com.example.weather_test.databinding.StartFragmentBinding
-import kotlinx.android.synthetic.main.detail_fragment.view.*
-import kotlinx.android.synthetic.main.start_fragment.*
-import okhttp3.OkHttpClient
-import okhttp3.Request
-import java.text.ParseException
 import java.text.SimpleDateFormat
-import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.*
 
@@ -44,13 +37,13 @@ class StartFragment : Fragment() {
         })
 
 
-        viewModel.navigateToSelectedProperty.observe(viewLifecycleOwner, Observer {
+        viewModel.navigateToSelectedProperty.observe(viewLifecycleOwner) {
             if (null != it) {
                 this.findNavController()
                     .navigate(StartFragmentDirections.actionStartFragmentToDetailFragment(it))
                 viewModel.displayPropertyDetailsComplete()
             }
-        })
+        }
 
         binding.viewModel = viewModel
 
@@ -58,52 +51,72 @@ class StartFragment : Fragment() {
 
 
 
-        viewModel.properties.observe(viewLifecycleOwner, Observer {
-            var dateday = it[0].weather[0].description
+        viewModel.properties.observe(viewLifecycleOwner) {
+            val dateday = it[0].weather[0].description
             val lightrain = "light rain"
             val overcastclouds = "overcast clouds"
             val brokencloud = "broken cloud"
             val clearsky = "clear sky"
             val scatteredclouds = "scattered clouds"
             val rain = "rain"
+            val fewclouds = "few clouds"
 
-            if (lightrain == dateday) {
-                binding.imageViewtoday.setImageResource(R.drawable.art_light_rain)
+            when {
+                lightrain == dateday -> {
+                    binding.imageViewtoday.setImageResource(R.drawable.art_light_rain)
+                }
+                overcastclouds == dateday -> {
+                    binding.imageViewtoday.setImageResource(R.drawable.art_light_clouds)
+                }
+                brokencloud == dateday -> {
+                    binding.imageViewtoday.setImageResource(R.drawable.art_clouds)
+                }
+                clearsky == dateday -> {
+                    binding.imageViewtoday.setImageResource(R.drawable.art_clear)
+                }
+                scatteredclouds == dateday -> {
+                    binding.imageViewtoday.setImageResource(R.drawable.art_clouds)
+                }
+                rain == dateday -> {
+                    binding.imageViewtoday.setImageResource(R.drawable.art_rain)
+                }
+                fewclouds == dateday -> {
+                    binding.imageViewtoday.setImageResource(R.drawable.art_light_clouds)
+                }
             }
-            else if (overcastclouds == dateday) {
-                binding.imageViewtoday.setImageResource(R.drawable.art_light_clouds)
-            }
-            else if (brokencloud == dateday) {
-                binding.imageViewtoday.setImageResource(R.drawable.art_clouds)
-            }
-            else if (clearsky == dateday) {
-                binding.imageViewtoday.setImageResource(R.drawable.art_clear)
-            }
-            else if (scatteredclouds == dateday) {
-                binding.imageViewtoday.setImageResource(R.drawable.art_clouds)
-            }
-            else if (rain == dateday) {
-                binding.imageViewtoday.setImageResource(R.drawable.art_rain)
-            }
-
-        })
-//
-//        binding.setDisplayIt()
+        }
 
 
-        viewModel.properties.observe(viewLifecycleOwner, Observer {
-            var newTempmax = it[0].temp.max
+        viewModel.properties.observe(viewLifecycleOwner) {
+            val newTempmax = it[0].temp.max
 
-            binding.setTempmax(((newTempmax.toInt().toString()) + "\u00B0"))
+            binding.tempmax = ((newTempmax.toInt().toString()) + "\u00B0")
 
-        })
+        }
 
-        viewModel.properties.observe(viewLifecycleOwner, Observer {
-            var newTempmin = it[0].temp.min
+        viewModel.properties.observe(viewLifecycleOwner) {
+            val newTempmin = it[0].temp.min
 
-            binding.setTempmin(((newTempmin.toInt().toString()) + "\u00B0"))
+            binding.tempmin = ((newTempmin.toInt().toString()) + "\u00B0")
 
-        })
+        }
+
+
+        viewModel.properties.observe(viewLifecycleOwner) {
+
+
+
+            val dtdate: Long = it[0].dt.toLong()
+
+            val date = Date(dtdate * 1000L)
+            val jdf = SimpleDateFormat("EEEE," + " MMMM" + " d")
+            jdf.timeZone = TimeZone.getTimeZone("GMT-4")
+            val todaydate = jdf.format(date)
+
+            val formattedWeek = todaydate.format(DateTimeFormatter.ofPattern("EEEE"))
+
+            binding.daydate = formattedWeek
+        }
 
 
         binding.weekList.adapter = WeatherAdapter(WeatherAdapter.OnClickListener {
@@ -111,29 +124,13 @@ class StartFragment : Fragment() {
         })
 
 
-
-
-
         binding.weekList.adapter = WeatherAdapter(WeatherAdapter.OnClickListener {
             viewModel.displayPropertyDetails(it)
         })
 
-
-
-
+        (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
         binding.lifecycleOwner = this
-        setHasOptionsMenu(true)
         return binding.root
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.menu, menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return NavigationUI.onNavDestinationSelected(item, requireView().findNavController())
-                || super.onOptionsItemSelected(item)
     }
 }
 
