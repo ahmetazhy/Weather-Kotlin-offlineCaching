@@ -25,7 +25,7 @@ import com.example.weather_test.network.Forecast
 class DetailViewModelFactory(
     private val forecast: Forecast,
     private val application: Application) : ViewModelProvider.Factory {
-    override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(DetailViewModel::class.java)) {
             return DetailViewModel(forecast , application) as T
         }

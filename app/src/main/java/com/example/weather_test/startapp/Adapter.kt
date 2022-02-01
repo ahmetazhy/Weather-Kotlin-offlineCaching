@@ -22,20 +22,21 @@ class WeatherAdapter(private val onClickListener: OnClickListener) :
     class WeatherPropertyViewHolder(private var binding: ViewItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        @SuppressLint("SimpleDateFormat", "SetTextI18n")
+        @SuppressLint("SimpleDateFormat")
         @RequiresApi(Build.VERSION_CODES.O)
         fun bind(forecast: Forecast) {
+
             binding.wTempMax.text = ((forecast.temp.max.toInt().toString())+ "\u00B0")
+
             binding.wTempMain.text = ((forecast.temp.min.toInt().toString())+ "\u00B0")
             binding.wDescription.text = forecast.weather[0].description
-
+//
             val dtdate: Long = forecast.dt.toLong()
             val date = Date(dtdate * 1000L)
             val jdf = SimpleDateFormat("EEEE")
             jdf.timeZone = TimeZone.getTimeZone("GMT-4")
             val weekdate = jdf.format(date)
-            val currentWeek = weekdate.format(DateTimeFormatter.ofPattern("EEEE"))
-            binding.wDayType.text = currentWeek
+            binding.wDayType.text = weekdate
 
             val icon=forecast.weather[0].description
             val lightrain = "light rain"
@@ -44,6 +45,8 @@ class WeatherAdapter(private val onClickListener: OnClickListener) :
             val clearsky = "clear sky"
             val scatteredclouds = "scattered clouds"
             val rain = "rain"
+            val moderaterain = "moderate rain"
+            val fewclouds = "few clouds"
 
 
             when {
@@ -51,6 +54,9 @@ class WeatherAdapter(private val onClickListener: OnClickListener) :
                     binding.wIcon.setImageResource(R.drawable.art_light_rain)
                 }
                 overcastclouds==icon -> {
+                    binding.wIcon.setImageResource(R.drawable.art_light_clouds)
+                }
+                fewclouds==icon -> {
                     binding.wIcon.setImageResource(R.drawable.art_light_clouds)
                 }
                 brokencloud==icon -> {
@@ -63,6 +69,9 @@ class WeatherAdapter(private val onClickListener: OnClickListener) :
                     binding.wIcon.setImageResource(R.drawable.art_clouds)
                 }
                 rain==icon -> {
+                    binding.wIcon.setImageResource(R.drawable.art_rain)
+                }
+                moderaterain==icon -> {
                     binding.wIcon.setImageResource(R.drawable.art_rain)
                 }
             }

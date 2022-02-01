@@ -25,13 +25,13 @@ class Detailfragment : Fragment() {
         val binding = DetailFragmentBinding.inflate(inflater)
         binding.lifecycleOwner = this
 
-        val forecast = DetailfragmentArgs.fromBundle(arguments!!).selectedProperty
+        val forecast = DetailfragmentArgs.fromBundle(requireArguments()).selectedProperty
 
         val viewModelFactory = DetailViewModelFactory(forecast, application)
 
         viewModell = ViewModelProvider(
             this, viewModelFactory
-        ).get(DetailViewModel::class.java)
+        )[DetailViewModel::class.java]
 
         binding.viewModell = this.viewModell
 
@@ -86,6 +86,7 @@ class Detailfragment : Fragment() {
             val scatteredclouds = "scattered clouds"
             val rain = "rain"
             val fewclouds = "few clouds"
+            val moderaterain = "moderate rain"
 
             when {
                 lightrain == dateday -> {
@@ -109,6 +110,9 @@ class Detailfragment : Fragment() {
                 fewclouds == dateday -> {
                     binding.imageViewdetail.setImageResource(R.drawable.art_light_clouds)
                 }
+                moderaterain==dateday -> {
+                    binding.imageViewdetail.setImageResource(R.drawable.art_rain)
+                }
             }
         }
 
@@ -128,7 +132,7 @@ class Detailfragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return NavigationUI.onNavDestinationSelected(item,
-            view!!.findNavController())
+            requireView().findNavController())
                 || super.onOptionsItemSelected(item)
     }
 }

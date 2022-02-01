@@ -34,10 +34,16 @@
 
     </data>
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/charcoal"
+        >
 <LinearLayout
 
-android:layout_height="match_parent"
+android:layout_height="wrap_content"
 android:layout_width="match_parent"
+    android:background="@color/charcoal"
 android:orientation="vertical">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -68,13 +74,12 @@ android:orientation="vertical">
             android:id="@+id/detail_one_maxtemp"
             style="@style/TextAppearance.Maxtemp"
             android:layout_width="wrap_content"
-            android:layout_height="65dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="44dp"
             android:layout_marginTop="5dp"
-            android:layout_marginBottom="28dp"
             android:text="@{tempmax}"
             android:textColor="@color/black"
-            app:layout_constraintBottom_toTopOf="@+id/detail_one_maintemp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageViewdetail"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.704"
             app:layout_constraintStart_toEndOf="@+id/imageViewdetail"
@@ -87,13 +92,12 @@ android:orientation="vertical">
             style="@style/TextAppearance.Description"
             android:layout_width="152dp"
             android:layout_height="61dp"
-            android:layout_marginBottom="65dp"
             android:text="@{String.valueOf(viewModell.selectedProperty.weather[0].description)}"
             android:textColor="@color/gray"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/detail_one_maintemp"
-            app:layout_constraintHorizontal_bias="0.49"
-            app:layout_constraintStart_toStartOf="parent"
+
+            app:layout_constraintEnd_toEndOf="@+id/imageViewdetail"
+            app:layout_constraintStart_toStartOf="@+id/imageViewdetail"
             tools:text="Rain" />
 
         <TextView
@@ -116,24 +120,19 @@ android:orientation="vertical">
             android:layout_marginTop="16dp"
             android:layout_marginBottom="30dp"
 
+            android:contentDescription="@string/detail_icon"
             app:layout_constraintBottom_toTopOf="@+id/detail_one_description"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/detail_one_date"
-            app:layout_constraintVertical_bias="1.0"
-            android:contentDescription="@string/detail_icon" />
+            app:layout_constraintVertical_bias="1.0" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_begin="20dp" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TableLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@color/charcoal"
     android:layout_gravity="center">
 
@@ -155,7 +154,7 @@ android:orientation="vertical">
             android:id="@+id/humidity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="60dp"
+            android:layout_marginStart="48dp"
             android:textSize="32sp"
             android:text="@{humidity}"
             android:textColor="@color/white"
@@ -180,7 +179,7 @@ android:orientation="vertical">
             android:id="@+id/pressure"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="60dp"
+            android:layout_marginStart="48dp"
             android:textSize="32sp"
             android:text="@{pressure}"
             android:textColor="@color/white"
@@ -205,7 +204,7 @@ android:orientation="vertical">
             android:id="@+id/wind"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="60dp"
+            android:layout_marginStart="48dp"
             android:text="@{wind}"
             android:textSize="32sp"
             android:textColor="@color/white"
@@ -213,5 +212,7 @@ android:orientation="vertical">
     </TableRow>
 </TableLayout>
 </LinearLayout>
+    </ScrollView>
+
 </layout>
 

@@ -21,9 +21,9 @@ class StartViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    private val _navigateToSelectedWeatherProperty= MutableLiveData<Forecast>()
+    private val _navigateToSelectedWeatherProperty= MutableLiveData<Forecast?>()
 
-    val navigateToSelectedProperty: MutableLiveData<Forecast>
+    val navigateToSelectedProperty: MutableLiveData<Forecast?>
         get() = _navigateToSelectedWeatherProperty
 
     val properties=weatherPropertyRepository.weatherPropertyData
@@ -35,6 +35,8 @@ class StartViewModel(application: Application) : AndroidViewModel(application) {
     fun displayPropertyDetailsComplete() {
         _navigateToSelectedWeatherProperty.value = null
     }
+
+
 
 }
 

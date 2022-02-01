@@ -10,12 +10,13 @@
         <entry key="..\:/Users/Ahmed/AndroidStudioProjects/weather_test/app/src/main/res/drawable/art_light_clouds.xml" value="0.1640625" />
         <entry key="..\:/Users/Ahmed/AndroidStudioProjects/weather_test/app/src/main/res/drawable/art_light_rain.xml" value="0.1640625" />
         <entry key="..\:/Users/Ahmed/AndroidStudioProjects/weather_test/app/src/main/res/drawable/art_snow.xml" value="0.1640625" />
+        <entry key="..\:/Users/Ahmed/AndroidStudioProjects/weather_test/app/src/main/res/drawable/ic_broken_image.xml" value="0.1425" />
         <entry key="..\:/Users/Ahmed/AndroidStudioProjects/weather_test/app/src/main/res/font/romanesco.xml" value="0.16145833333333334" />
         <entry key="..\:/Users/Ahmed/AndroidStudioProjects/weather_test/app/src/main/res/layout/activity_main.xml" value="0.2234375" />
         <entry key="..\:/Users/Ahmed/AndroidStudioProjects/weather_test/app/src/main/res/layout/detail_fragment.xml" value="0.264" />
         <entry key="..\:/Users/Ahmed/AndroidStudioProjects/weather_test/app/src/main/res/layout/nav_header.xml" value="0.2234375" />
-        <entry key="..\:/Users/Ahmed/AndroidStudioProjects/weather_test/app/src/main/res/layout/start_fragment.xml" value="0.264" />
-        <entry key="..\:/Users/Ahmed/AndroidStudioProjects/weather_test/app/src/main/res/layout/view_item.xml" value="0.2078125" />
+        <entry key="..\:/Users/Ahmed/AndroidStudioProjects/weather_test/app/src/main/res/layout/start_fragment.xml" value="0.4" />
+        <entry key="..\:/Users/Ahmed/AndroidStudioProjects/weather_test/app/src/main/res/layout/view_item.xml" value="0.35394126738794435" />
         <entry key="..\:/Users/Ahmed/AndroidStudioProjects/weather_test/app/src/main/res/menu/menu.xml" value="0.128" />
         <entry key="..\:/Users/Ahmed/AndroidStudioProjects/weather_test/app/src/main/res/menu/share.xml" value="0.1" />
       </map>
